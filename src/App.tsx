@@ -75,7 +75,7 @@ function App() {
               </button>
               <a
                 target="_blank"
-                href="https://forms.gle/EDbEjZ2qcsVRX82u8."
+                href="https://forms.gle/EDbEjZ2qcsVRX82u8"
                 className="block"
               >
                 <button className="bg-gradient-to-r from-red-600 to-black text-white px-6 py-2 rounded-lg hover:shadow-lg transform hover:-translate-y-0.5 transition-all font-semibold">
@@ -134,7 +134,7 @@ function App() {
               </button>
               <a
                 target="_blank"
-                href="https://forms.gle/EDbEjZ2qcsVRX82u8."
+                href="https://forms.gle/EDbEjZ2qcsVRX82u8"
                 className="block"
               >
                 <button className="bg-gradient-to-r from-red-600 to-black text-white px-6 py-2 rounded-lg hover:shadow-lg transform hover:-translate-y-0.5 transition-all font-semibold">
@@ -176,7 +176,7 @@ function App() {
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
                   target="_blank"
-                  href="https://forms.gle/EDbEjZ2qcsVRX82u8."
+                  href="https://forms.gle/EDbEjZ2qcsVRX82u8"
                   className="block"
                 >
                   <button className="bg-gradient-to-r from-red-600 to-black text-white px-8 py-4 rounded-xl font-bold hover:shadow-xl transform hover:-translate-y-1 transition-all flex items-center justify-center">
@@ -335,33 +335,11 @@ function App() {
                 ],
                 popular: true,
                 badge: "Most Popular",
-              },
-              {
-                title: "Advanced Ninja Training",
-                subtitle: "Senior PM Specialization",
-                duration: "8 weeks",
-                level: "Experienced PMs",
-                earlyPrice: "₦35,000",
-                regularPrice: "₦49,000",
-                features: [
-                  "Executive-level strategic thinking",
-                  "P&L ownership & business metrics",
-                  "Product portfolio management",
-                  "Advanced analytics & insights",
-                  "Cross-functional leadership",
-                  "Innovation frameworks",
-                  "Crisis management strategies",
-                  "Industry case studies",
-                  "Executive coaching sessions",
-                  "Senior PM network access",
-                ],
-                popular: false,
-                badge: "Advanced",
-              },
+              }
             ].map((course, index) => (
               <div
                 key={index}
-                className={`relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 ${
+                className={`relative col-span-2 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 ${
                   course.popular
                     ? "ring-2 ring-red-600 transform scale-105"
                     : "border-2 border-gray-200"
@@ -440,7 +418,7 @@ function App() {
 
                   <a
                     target="_blank"
-                    href="https://forms.gle/EDbEjZ2qcsVRX82u8."
+                    href="https://forms.gle/EDbEjZ2qcsVRX82u8"
                     className="block"
                   >
                     <button
@@ -674,7 +652,7 @@ function App() {
                       Call the Sensei
                     </h4>
                     <a href="tel:+2347063472279" className="text-gray-300">
-                      ++234 (0) 706 347 2279
+                      +234 (0) 706 347 2279
                     </a>
                   </div>
                 </div>
@@ -732,7 +710,7 @@ function App() {
                   </p>
                   <a
                     target="_blank"
-                    href="https://forms.gle/EDbEjZ2qcsVRX82u8."
+                    href="https://forms.gle/EDbEjZ2qcsVRX82u8"
                     className="block"
                   >
                     <button className="w-full bg-gradient-to-r from-red-600 to-black text-white py-3 rounded-lg font-bold hover:shadow-lg transform hover:-translate-y-0.5 transition-all">
@@ -742,9 +720,13 @@ function App() {
                 </div>
 
                 <div className="text-center">
-                  <p className="text-xs text-gray-500">
-                    Questions? WhatsApp us at +234 901 234 5678
-                  </p>
+                  <a
+                    href="https://api.whatsapp.com/send?phone=+2347063472279&text=Hello, I have questions about the training."
+                    target="_blank"
+                    className="text-xs text-gray-500"
+                  >
+                    Questions? WhatsApp us +234 (0) 706 347 2279
+                  </a>
                 </div>
               </div>
             </div>
