@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Menu,
   X,
@@ -17,14 +17,34 @@ import {
   Shield,
   Sword,
 } from "lucide-react";
+import {
+  initializeMixpanel,
+  trackNavigation,
+  trackCTA,
+  trackTestimonial,
+  trackContact,
+  trackPricingInterest,
+  trackExternalLink,
+} from "./utils/mixpanel";
+import { useAnalytics } from "./hooks/useAnalytics";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Initialize Mixpanel on component mount
+  useEffect(() => {
+    initializeMixpanel();
+  }, []);
+
+  // Initialize analytics after Mixpanel is set up
+  useAnalytics();
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
+      // Track navigation
+      trackNavigation(sectionId, isMenuOpen ? "mobile_menu" : "menu_click");
     }
     setIsMenuOpen(false);
   };
@@ -34,9 +54,9 @@ function App() {
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-md shadow-sm z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <div className="size-20 rounded-full bg-red-400">
+              <div className="size-20 rounded-full overflow-hidden">
                 <img src="/logo.jpg" className="w-full h-full object-cover" />
               </div>
             </div>
@@ -77,6 +97,13 @@ function App() {
                 target="_blank"
                 href="https://forms.gle/EDbEjZ2qcsVRX82u8"
                 className="block"
+                onClick={() =>
+                  trackCTA(
+                    "registration_form",
+                    "navigation_desktop",
+                    "Begin Training"
+                  )
+                }
               >
                 <button className="bg-gradient-to-r from-red-600 to-black text-white px-6 py-2 rounded-lg hover:shadow-lg transform hover:-translate-y-0.5 transition-all font-semibold">
                   Begin Training
@@ -136,6 +163,13 @@ function App() {
                 target="_blank"
                 href="https://forms.gle/EDbEjZ2qcsVRX82u8"
                 className="block"
+                onClick={() =>
+                  trackCTA(
+                    "registration_form",
+                    "navigation_mobile",
+                    "Begin Training"
+                  )
+                }
               >
                 <button className="bg-gradient-to-r from-red-600 to-black text-white px-6 py-2 rounded-lg hover:shadow-lg transform hover:-translate-y-0.5 transition-all font-semibold">
                   Begin Training
@@ -178,6 +212,9 @@ function App() {
                   target="_blank"
                   href="https://forms.gle/EDbEjZ2qcsVRX82u8"
                   className="block"
+                  onClick={() =>
+                    trackCTA("hero_cta", "hero_section", "Begin Your Journey")
+                  }
                 >
                   <button className="bg-gradient-to-r from-red-600 to-black text-white px-8 py-4 rounded-xl font-bold hover:shadow-xl transform hover:-translate-y-1 transition-all flex items-center justify-center">
                     Begin Your Journey
@@ -186,7 +223,12 @@ function App() {
                 </a>
               </div>
 
-              <div className="bg-white p-6 rounded-2xl shadow-lg border-l-4 border-red-600">
+              <div
+                className="bg-white p-6 rounded-2xl shadow-lg border-l-4 border-red-600"
+                onClick={() =>
+                  trackPricingInterest("early_bird", "hero_pricing_card")
+                }
+              >
                 <div className="flex items-center space-x-8">
                   <div className="text-center">
                     <div className="text-2xl font-bold text-black">₦25,000</div>
@@ -335,7 +377,7 @@ function App() {
                 ],
                 popular: true,
                 badge: "Most Popular",
-              }
+              },
             ].map((course, index) => (
               <div
                 key={index}
@@ -420,6 +462,13 @@ function App() {
                     target="_blank"
                     href="https://forms.gle/EDbEjZ2qcsVRX82u8"
                     className="block"
+                    onClick={() =>
+                      trackCTA(
+                        "course_enrollment",
+                        "course_section",
+                        "Begin Training"
+                      )
+                    }
                   >
                     <button
                       className={`w-full py-4 rounded-xl font-bold transition-all ${
@@ -565,7 +614,14 @@ function App() {
             ].map((testimonial, index) => (
               <div
                 key={index}
-                className="bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl transition-shadow border-2 border-transparent hover:border-red-600"
+                className="bg-white p-8 rounded-3xl shadow-lg hover:shadow-xl transition-shadow border-2 border-transparent hover:border-red-600 cursor-pointer"
+                onClick={() =>
+                  trackTestimonial(
+                    "click",
+                    testimonial.company,
+                    testimonial.name
+                  )
+                }
               >
                 <div className="flex items-center space-x-4 mb-6">
                   <img
@@ -633,17 +689,28 @@ function App() {
               </div>
 
               <div className="space-y-6">
-                <div className="flex items-center space-x-4">
+                <div
+                  className="flex items-center space-x-4 cursor-pointer"
+                  onClick={() => trackContact("email", "contact_section")}
+                >
                   <div className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center">
                     <Mail className="w-6 h-6 text-white" />
                   </div>
                   <div>
                     <h4 className="font-semibold text-white">Email the Dojo</h4>
-                    <p className="text-gray-300">senpaispmdojo@gmail.com</p>
+                    <a
+                      href="mailto:senpaispmdojo@gmail.com"
+                      className="text-gray-300 hover:text-white transition-colors"
+                    >
+                      senpaispmdojo@gmail.com
+                    </a>
                   </div>
                 </div>
 
-                <div className="flex items-center space-x-4">
+                <div
+                  className="flex items-center space-x-4 cursor-pointer"
+                  onClick={() => trackContact("phone", "contact_section")}
+                >
                   <div className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center">
                     <Phone className="w-6 h-6 text-white" />
                   </div>
@@ -651,7 +718,10 @@ function App() {
                     <h4 className="font-semibold text-white">
                       Call the Sensei
                     </h4>
-                    <a href="tel:+2347063472279" className="text-gray-300">
+                    <a
+                      href="tel:+2347063472279"
+                      className="text-gray-300 hover:text-white transition-colors"
+                    >
                       +234 (0) 706 347 2279
                     </a>
                   </div>
@@ -712,6 +782,13 @@ function App() {
                     target="_blank"
                     href="https://forms.gle/EDbEjZ2qcsVRX82u8"
                     className="block"
+                    onClick={() =>
+                      trackCTA(
+                        "registration_form",
+                        "contact_section",
+                        "Access Registration Form"
+                      )
+                    }
                   >
                     <button className="w-full bg-gradient-to-r from-red-600 to-black text-white py-3 rounded-lg font-bold hover:shadow-lg transform hover:-translate-y-0.5 transition-all">
                       Access Registration Form
@@ -723,7 +800,8 @@ function App() {
                   <a
                     href="https://api.whatsapp.com/send?phone=+2347063472279&text=Hello, I have questions about the training."
                     target="_blank"
-                    className="text-xs text-gray-500"
+                    className="text-xs text-gray-500 hover:text-white transition-colors"
+                    onClick={() => trackContact("whatsapp", "contact_section")}
                   >
                     Questions? WhatsApp us +234 (0) 706 347 2279
                   </a>
@@ -739,16 +817,8 @@ function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="space-y-4">
-              <div className="flex items-center space-x-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-red-600 to-black rounded-lg flex items-center justify-center">
-                  <Sword className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <span className="text-xl font-bold text-white">SENPAIS</span>
-                  <div className="text-xs text-red-400 font-semibold">
-                    PM DOJO
-                  </div>
-                </div>
+              <div className="size-20 rounded-full overflow-hidden">
+                <img src="/logo.jpg" className="w-full h-full object-cover" />
               </div>
               <p className="text-gray-400">
                 Nigeria's premier Product Management training dojo. Master the
@@ -791,6 +861,9 @@ function App() {
                   <a
                     href="https://medium.com/@senpaispmdojo"
                     className="hover:text-white transition-colors"
+                    onClick={() =>
+                      trackExternalLink("blog", "medium", "footer_resources")
+                    }
                   >
                     PM Blog
                   </a>
@@ -805,6 +878,7 @@ function App() {
                   <a
                     href="mailto:senpaispmdojo@gmail.com"
                     className="hover:text-white transition-colors"
+                    onClick={() => trackContact("email", "footer_support")}
                   >
                     Contact Sensei
                   </a>
@@ -821,18 +895,27 @@ function App() {
               <a
                 href="https://www.linkedin.com/company/senpais-pm-dojo/?viewAsMember=true"
                 className="text-gray-400 hover:text-white transition-colors"
+                onClick={() =>
+                  trackExternalLink("social_media", "linkedin", "footer")
+                }
               >
                 LinkedIn
               </a>
               <a
                 href="https://x.com/Senpaispmdojo"
                 className="text-gray-400 hover:text-white transition-colors"
+                onClick={() =>
+                  trackExternalLink("social_media", "twitter", "footer")
+                }
               >
                 Twitter
               </a>
               <a
                 href="https://www.instagram.com/senpaispmdojo/"
                 className="text-gray-400 hover:text-white transition-colors"
+                onClick={() =>
+                  trackExternalLink("social_media", "instagram", "footer")
+                }
               >
                 Instagram
               </a>
