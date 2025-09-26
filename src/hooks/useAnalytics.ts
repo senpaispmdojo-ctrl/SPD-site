@@ -3,6 +3,10 @@ import {
   trackScrollDepth,
   trackTimeOnPage,
   trackNavigation,
+  trackSessionStart,
+  trackSessionEnd,
+  trackConversionFunnel,
+  trackUserEngagement,
 } from "../utils/mixpanel";
 
 export const useAnalytics = () => {
@@ -17,8 +21,12 @@ export const useAnalytics = () => {
 
     // Add a small delay to ensure Mixpanel is initialized
     const initTimer = setTimeout(() => {
+      trackSessionStart();
+      trackConversionFunnel("page_load");
+      
       // Initial page load tracking
       trackNavigation("home", "scroll");
+      trackUserEngagement("page_load", "hero_section");
     }, 100);
 
     const handleScroll = () => {
@@ -58,6 +66,11 @@ export const useAnalytics = () => {
           if (isVisible) {
             setSectionsViewed((prev) => [...prev, section]);
             trackNavigation(section, "scroll");
+            
+            // Track conversion funnel progress
+            const funnelStep = `${section}_viewed`;
+            trackConversionFunnel(funnelStep);
+            trackUserEngagement("section_view", section);
           }
         }
       });
@@ -67,6 +80,7 @@ export const useAnalytics = () => {
     const handleBeforeUnload = () => {
       const timeSpent = Math.round((Date.now() - startTimeValue) / 1000);
       trackTimeOnPage(timeSpent, sectionsViewed);
+      trackSessionEnd(timeSpent, sectionsViewed);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -80,6 +94,7 @@ export const useAnalytics = () => {
       // Track final time on page
       const timeSpent = Math.round((Date.now() - startTimeValue) / 1000);
       trackTimeOnPage(timeSpent, sectionsViewed);
+      trackSessionEnd(timeSpent, sectionsViewed);
     };
   }, [sectionsViewed, maxScrollDepth]);
 

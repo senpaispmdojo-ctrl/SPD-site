@@ -2,6 +2,10 @@ import mixpanel from "mixpanel-browser";
 
 let isInitialized = false;
 
+const generateSessionId = () => {
+  return `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+};
+
 export const initializeMixpanel = () => {
   try {
     const MIXPANEL_TOKEN =
@@ -12,7 +16,16 @@ export const initializeMixpanel = () => {
       track_pageview: false,
       persistence: "localStorage",
       api_host: "https://api.mixpanel.com",
+      loaded: (mixpanel) => {
+        try {
+          mixpanel.start_session_recording();
+        } catch (error) {
+          console.warn("Session recording not available:", error);
+        }
+      },
     });
+
+    const sessionId = generateSessionId();
 
     mixpanel.register({
       page: "SENPAIS PM DOJO Landing Page",
@@ -20,10 +33,23 @@ export const initializeMixpanel = () => {
       user_agent: navigator.userAgent,
       screen_resolution: `${screen.width}x${screen.height}`,
       viewport_size: `${window.innerWidth}x${window.innerHeight}`,
+      referrer: document.referrer,
+      language: navigator.language,
+      platform: navigator.platform,
+      cookie_enabled: navigator.cookieEnabled,
+      online_status: navigator.onLine,
+
+      // Session context
+      session_start: new Date().toISOString(),
+      session_id: sessionId,
+      page_url: window.location.href,
+      page_title: document.title,
     });
 
     isInitialized = true;
-    console.log("Mixpanel initialized successfully");
+    console.log(
+      "Mixpanel initialized successfully with session replays enabled"
+    );
   } catch (error) {
     console.error("Failed to initialize Mixpanel:", error);
   }
@@ -43,6 +69,7 @@ export const trackEvent = (
       ...properties,
       timestamp: new Date().toISOString(),
       url: window.location.href,
+      session_id: mixpanel.get_property("session_id"),
     });
   } catch (error) {
     console.error("Mixpanel tracking error:", error);
@@ -173,6 +200,72 @@ export const resetUser = () => {
   } catch (error) {
     console.error("Mixpanel reset error:", error);
   }
+};
+
+// Session tracking functions
+export const trackSessionStart = () => {
+  trackEvent("Session Started", {
+    session_type: "landing_page",
+    entry_point: document.referrer || "direct",
+    device_type: /Mobile|Android|iPhone|iPad/.test(navigator.userAgent)
+      ? "mobile"
+      : "desktop",
+  });
+};
+
+export const trackSessionEnd = (duration: number, sectionsViewed: string[]) => {
+  trackEvent("Session Ended", {
+    session_duration_seconds: duration,
+    sections_viewed: sectionsViewed,
+    exit_point: window.location.href,
+    session_completion_rate: (sectionsViewed.length / 5) * 100, // 5 total sections
+  });
+};
+
+export const trackUserEngagement = (
+  action: string,
+  context: string,
+  details: Record<string, unknown> = {}
+) => {
+  trackEvent("User Engagement", {
+    engagement_action: action,
+    engagement_context: context,
+    engagement_timestamp: new Date().toISOString(),
+    ...details,
+  });
+};
+
+export const trackConversionFunnel = (step: string, value?: number) => {
+  trackEvent("Conversion Funnel", {
+    funnel_step: step,
+    funnel_value: value,
+    funnel_progress: getFunnelProgress(step),
+  });
+};
+
+const getFunnelProgress = (step: string): number => {
+  const funnelSteps = {
+    page_load: 0,
+    hero_viewed: 20,
+    course_section_viewed: 40,
+    testimonial_viewed: 60,
+    contact_section_viewed: 80,
+    cta_clicked: 100,
+  };
+  return funnelSteps[step as keyof typeof funnelSteps] || 0;
+};
+
+export const trackPageInteraction = (
+  interactionType: string,
+  element: string,
+  context: string
+) => {
+  trackEvent("Page Interaction", {
+    interaction_type: interactionType,
+    element_interacted: element,
+    interaction_context: context,
+    interaction_timestamp: new Date().toISOString(),
+  });
 };
 
 export default mixpanel;

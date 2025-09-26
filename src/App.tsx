@@ -25,6 +25,8 @@ import {
   trackContact,
   trackPricingInterest,
   trackExternalLink,
+  trackConversionFunnel,
+  trackPageInteraction,
 } from "./utils/mixpanel";
 import { useAnalytics } from "./hooks/useAnalytics";
 
@@ -97,13 +99,19 @@ function App() {
                 target="_blank"
                 href="https://forms.gle/EDbEjZ2qcsVRX82u8"
                 className="block"
-                onClick={() =>
+                onClick={() => {
                   trackCTA(
                     "registration_form",
                     "navigation_desktop",
                     "Begin Training"
-                  )
-                }
+                  );
+                  trackConversionFunnel("cta_clicked");
+                  trackPageInteraction(
+                    "cta_click",
+                    "navigation_cta",
+                    "desktop"
+                  );
+                }}
               >
                 <button className="bg-gradient-to-r from-red-600 to-black text-white px-6 py-2 rounded-lg hover:shadow-lg transform hover:-translate-y-0.5 transition-all font-semibold">
                   Begin Training
@@ -212,9 +220,15 @@ function App() {
                   target="_blank"
                   href="https://forms.gle/EDbEjZ2qcsVRX82u8"
                   className="block"
-                  onClick={() =>
-                    trackCTA("hero_cta", "hero_section", "Begin Your Journey")
-                  }
+                  onClick={() => {
+                    trackCTA("hero_cta", "hero_section", "Begin Your Journey");
+                    trackConversionFunnel("cta_clicked");
+                    trackPageInteraction(
+                      "cta_click",
+                      "hero_cta",
+                      "hero_section"
+                    );
+                  }}
                 >
                   <button className="bg-gradient-to-r from-red-600 to-black text-white px-8 py-4 rounded-xl font-bold hover:shadow-xl transform hover:-translate-y-1 transition-all flex items-center justify-center">
                     Begin Your Journey
