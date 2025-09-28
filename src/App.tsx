@@ -367,7 +367,7 @@ function App() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-8 max-w-5xl mx-auto">
             {[
               {
                 title: "White Belt to Black Belt",
@@ -385,17 +385,38 @@ function App() {
                   "Go-to-market strategy",
                   "Product metrics & KPIs",
                   "Leadership & team building",
-                  "1-on-1 sensei mentorship",
                   "Career placement assistance",
                   "Lifetime dojo community access",
                 ],
                 popular: true,
                 badge: "Most Popular",
               },
+              {
+                title: "1-on-1 Executive Mentorship",
+                subtitle: "Premium Personal Coaching",
+                duration: "12 weeks",
+                level: "Senior PMs & Executives",
+                earlyPrice: "₦100,000",
+                regularPrice: "₦150,000",
+                features: [
+                  "Personalized 1-on-1 coaching sessions",
+                  "Custom career development roadmap",
+                  "Executive-level strategic guidance",
+                  "Direct access to industry leaders",
+                  "Personalized portfolio review",
+                  "Salary negotiation strategies",
+                  "Executive presence development",
+                  "Crisis leadership coaching",
+                  "Industry-specific mentorship",
+                  "Lifetime mentor relationship",
+                ],
+                popular: false,
+                badge: "Premium",
+              },
             ].map((course, index) => (
               <div
                 key={index}
-                className={`relative col-span-2 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 ${
+                className={`relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 ${
                   course.popular
                     ? "ring-2 ring-red-600 transform scale-105"
                     : "border-2 border-gray-200"
@@ -435,22 +456,22 @@ function App() {
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <div className="flex items-center space-x-4">
-                      <div>
-                        <span className="text-3xl font-bold text-red-600">
+                  <div className="space-y-3">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 space-y-2 sm:space-y-0">
+                      <div className="flex items-center space-x-2">
+                        <span className="text-2xl sm:text-3xl font-bold text-red-600">
                           {course.earlyPrice}
                         </span>
-                        <span className="text-sm text-gray-600 ml-2">
+                        <span className="text-sm text-gray-600">
                           Early Bird
                         </span>
                       </div>
-                      <div className="text-gray-400">|</div>
-                      <div>
-                        <span className="text-2xl font-bold text-gray-600">
+                      <div className="hidden sm:block text-gray-400">|</div>
+                      <div className="flex items-center space-x-2">
+                        <span className="text-xl sm:text-2xl font-bold text-gray-600">
                           {course.regularPrice}
                         </span>
-                        <span className="text-sm text-gray-500 ml-2">
+                        <span className="text-sm text-gray-500">
                           Regular
                         </span>
                       </div>
