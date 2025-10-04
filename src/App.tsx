@@ -471,9 +471,7 @@ function App() {
                         <span className="text-xl sm:text-2xl font-bold text-gray-600">
                           {course.regularPrice}
                         </span>
-                        <span className="text-sm text-gray-500">
-                          Regular
-                        </span>
+                        <span className="text-sm text-gray-500">Regular</span>
                       </div>
                     </div>
                     <p className="text-sm text-red-600 font-semibold">
@@ -620,31 +618,32 @@ function App() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
-                name: "Adaora Okafor",
-                role: "Senior PM at Paystack",
-                company: "Paystack",
+                name: "Ademide Ademola",
+                role: "Founder and Executive Director",
+                company: "4Herfrika",
                 image:
-                  "https://images.pexels.com/photos/762020/pexels-photo-762020.jpeg",
+                  "/images/ademide.JPG",
                 testimonial:
-                  "SENPAIS PM DOJO transformed my mindset. The discipline and strategic frameworks helped me land my dream role at Paystack. The sensei's guidance was invaluable!",
+                  "If there’s anyone I’ll trust my product to, its Dojo. The academy’s technique is beautiful— combining strategic learning frameworks with handon product experience. Awesome work by the team.",
               },
               {
-                name: "Kemi Adebayo",
-                role: "Product Lead",
-                company: "Flutterwave",
+                name: "Nosamudiana Iwinosa",
+                role: "Founder - SpenTrail",
+                company: "SpenTrail",
                 image:
-                  "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg",
+                  "/images/nosamudiana.JPG",
                 testimonial:
-                  "The dojo's unique approach combining discipline with practical skills is unmatched. I went from junior to product lead in 8 months. The community support is incredible!",
+                  "At Spentrail we had the privilege of hiring two graduates from the SENPAIS PM Dojo, and they have been nothing short of amazing. Their discipline, skillset, and ability to deliver results have added so much value to our team at Spendtrail. The quality of training they received clearly shows in the excellence of their work.",
               },
+
               {
-                name: "Chinedu Okwu",
-                role: "VP of Product",
-                company: "Kuda Bank",
+                name: "Anthony Akpan",
+                role: "Founder",
+                company: "Goalmatic",
                 image:
-                  "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg",
+                  "/images/anthony.JPG",
                 testimonial:
-                  "Training at SENPAIS was like unlocking a new level in my career. The mentorship and real-world projects prepared me for executive leadership. Highly recommend!",
+                  "Senpai dojo has been instrumental in shedding light on the often-misunderstood field of product management. Not only did they help clarify the importance of product managers, but they also created valuable content that showcases best practices. What's more, they've invested time in training individuals to become effective and efficient product managers. Their expertise and dedication have made a significant impact on the industry.",
               },
             ].map((testimonial, index) => (
               <div
