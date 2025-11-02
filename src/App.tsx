@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "@tanstack/react-router";
 import {
   Menu,
   X,
@@ -95,9 +96,8 @@ function App() {
               >
                 Contact
               </button>
-              <a
-                target="_blank"
-                href="https://forms.gle/EDbEjZ2qcsVRX82u8"
+              <Link
+                to="/begin-training"
                 className="block"
                 onClick={() => {
                   trackCTA(
@@ -116,7 +116,7 @@ function App() {
                 <button className="bg-gradient-to-r from-red-600 to-black text-white px-6 py-2 rounded-lg hover:shadow-lg transform hover:-translate-y-0.5 transition-all font-semibold">
                   Begin Training
                 </button>
-              </a>
+              </Link>
             </div>
 
             {/* Mobile menu button */}
@@ -167,9 +167,8 @@ function App() {
               >
                 Contact
               </button>
-              <a
-                target="_blank"
-                href="https://forms.gle/EDbEjZ2qcsVRX82u8"
+              <Link
+                to="/begin-training"
                 className="block"
                 onClick={() =>
                   trackCTA(
@@ -182,7 +181,7 @@ function App() {
                 <button className="bg-gradient-to-r from-red-600 to-black text-white px-6 py-2 rounded-lg hover:shadow-lg transform hover:-translate-y-0.5 transition-all font-semibold">
                   Begin Training
                 </button>
-              </a>
+              </Link>
             </div>
           </div>
         )}
@@ -216,9 +215,8 @@ function App() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <a
-                  target="_blank"
-                  href="https://forms.gle/EDbEjZ2qcsVRX82u8"
+                <Link
+                  to="/begin-training"
                   className="block"
                   onClick={() => {
                     trackCTA("hero_cta", "hero_section", "Begin Your Journey");
@@ -234,7 +232,7 @@ function App() {
                     Begin Your Journey
                     <ArrowRight className="w-5 h-5 ml-2" />
                   </button>
-                </a>
+                </Link>
               </div>
 
               <div
@@ -491,9 +489,8 @@ function App() {
                     ))}
                   </ul>
 
-                  <a
-                    target="_blank"
-                    href="https://forms.gle/EDbEjZ2qcsVRX82u8"
+                  <Link
+                    to="/begin-training"
                     className="block"
                     onClick={() =>
                       trackCTA(
@@ -512,7 +509,7 @@ function App() {
                     >
                       Begin Training
                     </button>
-                  </a>
+                  </Link>
                 </div>
               </div>
             ))}
@@ -812,9 +809,8 @@ function App() {
                   <p className="text-sm text-gray-700 mb-3">
                     After payment, complete your registration:
                   </p>
-                  <a
-                    target="_blank"
-                    href="https://forms.gle/EDbEjZ2qcsVRX82u8"
+                  <Link
+                    to="/begin-training"
                     className="block"
                     onClick={() =>
                       trackCTA(
@@ -827,7 +823,7 @@ function App() {
                     <button className="w-full bg-gradient-to-r from-red-600 to-black text-white py-3 rounded-lg font-bold hover:shadow-lg transform hover:-translate-y-0.5 transition-all">
                       Access Registration Form
                     </button>
-                  </a>
+                  </Link>
                 </div>
 
                 <div className="text-center">
