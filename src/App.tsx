@@ -249,14 +249,14 @@ function App() {
                     <div className="text-sm text-red-600 font-semibold">
                       Early Bird
                     </div>
-                    <div className="text-xs text-gray-600">Until Apr 1</div>
+                    <div className="text-xs text-gray-600">Until Apr 1st</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-gray-600">
                       ₦39,000
                     </div>
                     <div className="text-sm text-gray-600">Regular Price</div>
-                    <div className="text-xs text-gray-500">After Oct 31</div>
+                    <div className="text-xs text-gray-500">After Apr 1st</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-black">50+</div>
