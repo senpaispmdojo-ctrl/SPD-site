@@ -199,7 +199,7 @@ function App() {
               <div className="space-y-4">
                 <div className="inline-flex items-center px-4 py-2 bg-red-100 text-red-800 rounded-full text-sm font-bold">
                   <Zap className="w-4 h-4 mr-2" />
-                  EARLY BIRD: ₦25,000 - Ends October 31st!
+                  EARLY BIRD: ₦29,000 - Ends April 1st!
                 </div>
                 <h1 className="text-4xl lg:text-6xl font-bold text-black leading-tight">
                   Master Product Management at the
@@ -245,11 +245,11 @@ function App() {
               >
                 <div className="flex items-center space-x-8">
                   <div className="text-center">
-                    <div className="text-2xl font-bold text-black">₦25,000</div>
+                    <div className="text-2xl font-bold text-black">₦29,000</div>
                     <div className="text-sm text-red-600 font-semibold">
                       Early Bird
                     </div>
-                    <div className="text-xs text-gray-600">Until Oct 31</div>
+                    <div className="text-xs text-gray-600">Until Apr 1</div>
                   </div>
                   <div className="text-center">
                     <div className="text-2xl font-bold text-gray-600">
@@ -374,7 +374,7 @@ function App() {
                 subtitle: "Complete PM Mastery Program",
                 duration: "12 weeks",
                 level: "Beginner to Advanced",
-                earlyPrice: "₦25,000",
+                earlyPrice: "₦29,000",
                 regularPrice: "₦39,000",
                 features: [
                   "Product strategy & vision mastery",
@@ -416,20 +416,18 @@ function App() {
             ].map((course, index) => (
               <div
                 key={index}
-                className={`relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 ${
-                  course.popular
-                    ? "ring-2 ring-red-600 transform scale-105"
-                    : "border-2 border-gray-200"
-                }`}
+                className={`relative bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-300 ${course.popular
+                  ? "ring-2 ring-red-600 transform scale-105"
+                  : "border-2 border-gray-200"
+                  }`}
               >
                 {course.badge && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                     <span
-                      className={`${
-                        course.popular
-                          ? "bg-gradient-to-r from-red-600 to-black"
-                          : "bg-gray-800"
-                      } text-white px-6 py-2 rounded-full text-sm font-bold`}
+                      className={`${course.popular
+                        ? "bg-gradient-to-r from-red-600 to-black"
+                        : "bg-gray-800"
+                        } text-white px-6 py-2 rounded-full text-sm font-bold`}
                     >
                       {course.badge}
                     </span>
@@ -475,7 +473,7 @@ function App() {
                       </div>
                     </div>
                     <p className="text-sm text-red-600 font-semibold">
-                      Early Bird ends October 31st!
+                      Early Bird ends April 1st!
                     </p>
                   </div>
 
@@ -504,11 +502,10 @@ function App() {
                     }
                   >
                     <button
-                      className={`w-full py-4 rounded-xl font-bold transition-all ${
-                        course.popular
-                          ? "bg-gradient-to-r from-red-600 to-black text-white hover:shadow-lg transform hover:-translate-y-0.5"
-                          : "border-2 border-gray-800 text-gray-800 hover:border-red-600 hover:text-red-600"
-                      }`}
+                      className={`w-full py-4 rounded-xl font-bold transition-all ${course.popular
+                        ? "bg-gradient-to-r from-red-600 to-black text-white hover:shadow-lg transform hover:-translate-y-0.5"
+                        : "border-2 border-gray-800 text-gray-800 hover:border-red-600 hover:text-red-600"
+                        }`}
                     >
                       Begin Training
                     </button>
@@ -709,11 +706,11 @@ function App() {
                 </h3>
                 <div className="space-y-2">
                   <p className="text-white">
-                    Save ₦14,000 when you register before October 31st!
+                    Save ₦10,000 when you register before April 1st!
                   </p>
                   <div className="flex items-center space-x-4">
                     <span className="text-2xl font-bold text-white">
-                      ₦25,000
+                      ₦29,000
                     </span>
                     <span className="text-lg text-red-200 line-through">
                       ₦39,000
@@ -794,13 +791,13 @@ function App() {
                   </p>
                   <div className="space-y-1 text-sm">
                     <p>
-                      <strong>Bank:</strong> Access Bank
+                      <strong>Bank:</strong> Zenith Bank
                     </p>
                     <p>
-                      <strong>Account:</strong> 1239389517
+                      <strong>Account:</strong> 1311329536
                     </p>
                     <p>
-                      <strong>Name:</strong> Adaeze Chukwu
+                      <strong>Name:</strong> SENPAI&apos;S PM DOJO LTD
                     </p>
                   </div>
                 </div>
